@@ -11,6 +11,8 @@
     'what!? i didn\'t say anything'
   ];
 
+  function sample(c) { return c[Math.floor(Math.random() * c.length)]; }
+
   app.GiggleService =
     ng.core.Class({
       constructor: [ng.core.NgZone, function(ngZone) {
@@ -19,10 +21,8 @@
         this._ngZone = ngZone;
       }],
       prompt: function() {
-        var response = unpromptedResponses[
-          Math.floor(Math.random() * unpromptedResponses.length)
-        ];
-        this.speak(response);
+        var response = sample(unpromptedResponses);
+        setTimeout(this.speak.bind(this, response), 500);
       },
       speak: function(text) {
         var utterThis = new SpeechSynthesisUtterance(text);

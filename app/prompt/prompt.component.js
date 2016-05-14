@@ -12,7 +12,7 @@
       }],
       prompt: function(audio) {
         audio.play();
-        this.giggleService.prompt();
+        this.giggleService.prompt(1000);
       }
     });
 })(window.app || (window.app = {}));
