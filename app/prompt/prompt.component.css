@@ -12,6 +12,6 @@
   margin: 5px;
 }
 
-.prompt.white i {
+.prompt a.white i {
   color: red;
 }

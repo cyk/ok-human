@@ -1,10 +1,12 @@
 <div class="status">{{getStatus((speaking$ | async))}}</div>
 
-<a class="prompt btn-floating btn-large waves-effect waves-light" 
-  (click)="prompt(audio)"
-  [ngClass]="{red: (speaking$ | async), white: !(speaking$ | async)}">
-  <i class="material-icons">mic</i>
-</a>
+<div class="prompt">
+  <a class="btn-floating btn-large waves-effect waves-light" 
+    (click)="prompt(audio)"
+    [ngClass]="{red: (speaking$ | async), white: !(speaking$ | async)}">
+    <i class="material-icons">mic</i>
+  </a>
+</div>
 
 <audio #audio>
   <source src="assets/prompt.mp3" type="audio/mp3" />
