@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  margin: 0 10vh;
+}
+
+.status {
+  font-size: 2rem;
+  opacity: .5;
+}
+
+.prompt i {
+  color: red;
+}
