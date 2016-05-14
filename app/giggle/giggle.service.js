@@ -13,7 +13,11 @@
 
   app.GiggleService =
     ng.core.Class({
-      constructor: function() {},
+      constructor: [ng.core.NgZone, function(ngZone) {
+        this._speaking = new Rx.Subject();
+        this.speaking$ = this._speaking.asObservable().startWith(false);
+        this._ngZone = ngZone;
+      }],
       prompt: function() {
         var response = unpromptedResponses[
           Math.floor(Math.random() * unpromptedResponses.length)
@@ -23,6 +27,16 @@
       speak: function(text) {
         var utterThis = new SpeechSynthesisUtterance(text);
         utterThis.voice = voice;
+        utterThis.addEventListener('start', function() {
+          this._ngZone.run(function() {
+            this._speaking.next(true);
+          }.bind(this));
+        }.bind(this));
+        utterThis.addEventListener('end', function() {
+          this._ngZone.run(function() {
+            this._speaking.next(false);
+          }.bind(this));
+        }.bind(this));
         synth.speak(utterThis);
       }
     });

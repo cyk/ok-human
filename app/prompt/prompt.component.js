@@ -8,8 +8,10 @@
     .Class({
       constructor: [app.GiggleService, function(giggleService) {
         this.giggleService = giggleService;
+        this.speaking$ = giggleService.speaking$;
       }],
-      prompt: function() {
+      prompt: function(audio) {
+        audio.play();
         this.giggleService.prompt();
       }
     });

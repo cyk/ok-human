@@ -11,6 +11,6 @@
   opacity: .5;
 }
 
-.prompt i {
+.prompt.white i {
   color: red;
 }

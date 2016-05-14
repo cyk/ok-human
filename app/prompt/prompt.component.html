@@ -1,7 +1,13 @@
 <div class="status">
-  Speak now
+  Say "Ok Human"
 </div>
 
-<a class="prompt btn-floating btn-large waves-effect waves-light white" (click)="prompt()">
+<a class="prompt btn-floating btn-large waves-effect waves-light" 
+  (click)="prompt(audio)"
+  [ngClass]="{red: (speaking$ | async), white: !(speaking$ | async)}">
   <i class="material-icons">mic</i>
 </a>
+
+<audio #audio>
+  <source src="assets/prompt.mp3" type="audio/mp3" />
+</audio>
