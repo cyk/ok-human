@@ -12,7 +12,7 @@
       }],
       prompt: function(audio) {
         audio.play();
-        this.giggleService.prompt(1000);
+        this.giggleService.prompt();
       },
       getStatus: function(speaking) {
         var status = 'Say "Ok Human"';

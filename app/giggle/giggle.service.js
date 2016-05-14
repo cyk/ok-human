@@ -6,8 +6,11 @@
       return v.name === 'Google US English';
     });
   };
-  var questions = [
-    'what is the answer to life the universe and everything?'
+  var trivia = [
+    ['what is the answer to life the universe and everything?', 42],
+    ['what is 15% of 80', 12],
+    ['how far away is the moon?', 238900],
+    ['what does the fox say?', null],
   ];
   var unpromptedResponses = [
     'it thinks i said "ok human"!',
@@ -24,9 +27,24 @@
         this._ngZone = ngZone;
       }],
       prompt: function() {
-        var response = sample(unpromptedResponses);
+        // Listening? Huh, what?
         this._speaking.next('');
-        setTimeout(this.speak.bind(this, response), 500);
+        this.speakAfterDelay(sample(unpromptedResponses), 500);
+
+        // Now that you've got me attention...
+        this.speaking$
+          .skipWhile(function(t) { return t !== null; })
+          .first()
+          .subscribe(this.engage.bind(this));
+      },
+      engage: function() {
+        var questionAndAnswer = sample(trivia);
+        var question = questionAndAnswer[0];
+        var answer = questionAndAnswer[1];
+        this.speakAfterDelay(question, 2000);
+      },
+      speakAfterDelay: function(text, delay) {
+        return setTimeout(this.speak.bind(this, text), delay);
       },
       speak: function(text) {
         var utterThis = new SpeechSynthesisUtterance(text);
