@@ -13,6 +13,16 @@
       prompt: function(audio) {
         audio.play();
         this.giggleService.prompt(1000);
+      },
+      getStatus: function(speaking) {
+        var status = 'Say "Ok Human"';
+        if (speaking === '') {
+          status = 'Listening...';
+        }
+        if (speaking) {
+          status = speaking;
+        }
+        return status;
       }
     });
 })(window.app || (window.app = {}));

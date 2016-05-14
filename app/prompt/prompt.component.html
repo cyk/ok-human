@@ -1,6 +1,4 @@
-<div class="status">
-  Say "Ok Human"
-</div>
+<div class="status">{{getStatus((speaking$ | async))}}</div>
 
 <a class="prompt btn-floating btn-large waves-effect waves-light" 
   (click)="prompt(audio)"
