@@ -1,0 +1,13 @@
+/* Reset */
+html,
+body,
+div {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Box-sizing border-box */
+* {
+  box-sizing: border-box;
+}
