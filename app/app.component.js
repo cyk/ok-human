@@ -2,6 +2,7 @@
   app.AppComponent =
     ng.core.Component({
       selector: 'oh-app',
+      viewProviders: [app.GiggleService],
       templateUrl: 'app/app.component.html',
       styleUrls: ['app/app.component.css'],
       directives: [app.PromptComponent]

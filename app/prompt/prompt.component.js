@@ -6,6 +6,11 @@
       styleUrls: ['app/prompt/prompt.component.css']
     })
     .Class({
-      constructor: function() {}
+      constructor: [app.GiggleService, function(giggleService) {
+        this.giggleService = giggleService;
+      }],
+      prompt: function() {
+        this.giggleService.prompt();
+      }
     });
 })(window.app || (window.app = {}));
