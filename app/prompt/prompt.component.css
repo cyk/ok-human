@@ -7,8 +7,9 @@
 }
 
 .status {
-  font-size: 2rem;
+  font-size: 1.5rem;
   opacity: .5;
+  margin: 5px;
 }
 
 .prompt.white i {
