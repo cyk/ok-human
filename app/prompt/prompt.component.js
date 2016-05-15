@@ -8,21 +8,12 @@
     .Class({
       constructor: [app.GiggleService, function(giggleService) {
         this.giggleService = giggleService;
+        this.status$ = giggleService.status$;
         this.speaking$ = giggleService.speaking$;
       }],
       prompt: function(audio) {
         audio.play();
         this.giggleService.prompt();
-      },
-      getStatus: function(speaking) {
-        var status = 'Say "Ok Human"';
-        if (speaking === '') {
-          status = 'Listening...';
-        }
-        if (speaking) {
-          status = speaking;
-        }
-        return status;
       }
     });
 })(window.app || (window.app = {}));

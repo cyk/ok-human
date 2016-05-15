@@ -1,9 +1,9 @@
-<div class="status">{{getStatus((speaking$ | async))}}</div>
+<div class="status">{{(status$ | async) || 'Say "Ok Human"'}}</div>
 
 <div class="prompt">
   <a class="btn-floating btn-large waves-effect waves-light" 
     (click)="prompt(audio)"
-    [ngClass]="{red: (speaking$ | async), white: !(speaking$ | async)}">
+    [ngClass]="{red: (status$ | async), white: !(status$ | async)}">
     <i class="material-icons">mic</i>
   </a>
 </div>
