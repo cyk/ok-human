@@ -3,7 +3,7 @@
 <div class="prompt">
   <a class="btn-floating btn-large waves-effect waves-light" 
     (click)="prompt(audio)"
-    [ngClass]="{red: (status$ | async), white: !(status$ | async)}">
+    [ngClass]="{red: (listening$ | async), white: !(listening$ | async)}">
     <i class="material-icons">mic</i>
   </a>
 </div>

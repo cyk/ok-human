@@ -10,6 +10,7 @@
         this.giggleService = giggleService;
         this.status$ = giggleService.status$;
         this.speaking$ = giggleService.speaking$;
+        this.listening$ = giggleService.listening$;
       }],
       prompt: function(audio) {
         audio.play();
