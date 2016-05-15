@@ -1,0 +1,19 @@
+<div class="modal" [class.open]="isOpen">
+  
+  <div class="modal-content">
+    <h4>Ok Google? Ok Human.</h4>
+    <p>The tables have turned. Do your job, Human! How will you fare with the roles reversed?</p>
+    <h5>How to Play</h5>
+    <img src="assets/prompt-click.gif">
+    <ol>
+      <li>Click the prompt button <em>because, of course, your assistance was needed,</em> right?<br></li>
+      <li>Oh, was that ill-timed?</li>
+      <li>Wait for your prompt, human!</li>
+      <li>Answer the question you were asked.</li>
+    </ol>
+  </div>
+  <div class="modal-footer">
+    <a (click)="hide()" class="modal-action modal-close waves-effect waves-green btn-flat">Ok</a>
+  </div>
+</div>
+<div (click)="hide()" class="lean-overlay" [class.open]="isOpen"></div>

@@ -5,7 +5,10 @@
       viewProviders: [app.GiggleService],
       templateUrl: 'app/app.component.html',
       styleUrls: ['app/app.component.css'],
-      directives: [app.PromptComponent]
+      directives: [
+        app.InstructionsComponent,
+        app.PromptComponent
+      ]
     })
     .Class({
       constructor: function() {}
