@@ -6,7 +6,7 @@
       return v.name === 'Google US English';
     });
   };
-  var promptResponses = [
+  var undesiredPromptResponses = [
     'it thinks i said "ok human"!',
     'what!? i didn\'t say anything'
   ];
@@ -15,6 +15,10 @@
     'ok human',
     'ok human?!',
     'piece of junk'
+  ];
+
+  var questions = [
+    'what is the answer to life, the universe, and everything?'
   ];
 
   function sample(c) { return c[Math.floor(Math.random() * c.length)]; }
@@ -45,7 +49,7 @@
             }.bind(this))
           );
 
-        this.listening$
+        var promptRequests$ = this.listening$
           .skip(1)
           .filter(function(listening) { return listening === false; })
           .first()
@@ -55,16 +59,24 @@
               Rx.Observable.from(promptRequests),
               function(i, r) { return r; }
             );
-          })
-          .subscribe(function(text) {
-            this.speak(text);
-          }.bind(this));
+          });
+
+        this.promptRequestSub = promptRequests$.subscribe(function(text) {
+          this.speak(text);
+          this.promptWasRequested = true;
+        }.bind(this));
       }],
       prompt: function() {
-        this._prompt.next(true);
+        var text;
         this._listening.next(true);
+        if (this.promptWasRequested) {
+          this.promptRequestSub.unsubscribe();
+          text = sample(questions);
+        } else {
+          text = sample(undesiredPromptResponses);
+        }
         setTimeout(function() {
-          this.speak(sample(promptResponses));
+          this.speak(text);
         }.bind(this), 1000);
       },
       speak: function(text) {

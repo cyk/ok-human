@@ -15,7 +15,6 @@
         this.isMirrored = false;
       },
       mirror: function() {
-        console.log('mirror', this);
         this.isMirrored = true;
       }
     });
