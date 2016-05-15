@@ -1,6 +1,8 @@
 (function(app) {
   var voice;
   var synth = window.speechSynthesis;
+  var SpeechRecognition = window.webkitSpeechRecognition;
+
   synth.onvoiceschanged = function() {
     voice = synth.getVoices().find(function(v) {
       return v.name === 'Google US English';
@@ -18,7 +20,7 @@
   ];
 
   var questions = [
-    'what is the answer to life, the universe, and everything?'
+    ['what is the answer to life, the universe, and everything?', '42']
   ];
 
   function sample(c) { return c[Math.floor(Math.random() * c.length)]; }
@@ -39,10 +41,14 @@
           .asObservable()
           .startWith(false);
 
-        this.status$ = this.listening$
-          .switchMap(function(listening) {
-            return listening ? speaking$ : Rx.Observable.never();
-          })
+        this._status = new Rx.Subject();
+        this.status$ = this._status.asObservable()
+          .merge(
+            this.listening$
+              .switchMap(function(listening) {
+                return listening ? speaking$ : Rx.Observable.never();
+              })
+          )
           .merge(
             this.listening$.map(function(isListening) {
               return isListening ? 'Listening...' : null;
@@ -71,13 +77,16 @@
         this._listening.next(true);
         if (this.promptWasRequested) {
           this.promptRequestSub.unsubscribe();
-          text = sample(questions);
+          var questionAndAnswer = sample(questions);
+          this.attemptAnswerAfterListening(questionAndAnswer[1]);
+          setTimeout(function() {
+            this.speak(questionAndAnswer[0]);
+          }.bind(this), 1000);
         } else {
-          text = sample(undesiredPromptResponses);
+          setTimeout(function() {
+            this.speak(sample(undesiredPromptResponses));
+          }.bind(this), 1000);
         }
-        setTimeout(function() {
-          this.speak(text);
-        }.bind(this), 1000);
       },
       speak: function(text) {
         var utterThis = new SpeechSynthesisUtterance(text);
@@ -93,6 +102,35 @@
           }.bind(this));
         }.bind(this));
         synth.speak(utterThis);
+      },
+      thank: function() {
+        this.speak('Thank you!');
+      },
+      berate: function() {
+        this.speak('That cant be right. Where is my iPhone?');
+      },
+      attemptAnswerAfterListening: function(answer) {
+        var sub = this.listening$.subscribe(function(listening) {
+          if (listening === false) {
+            this.attemptAnswer(answer);
+            sub.unsubscribe();
+          }
+        }.bind(this));
+      },
+      attemptAnswer: function(answer) {
+        var recognition = new SpeechRecognition();
+        var giggle = this;
+        recognition.start();
+        recognition.onresult = function(event) {
+          if (event.results[0].isFinal) {
+            console.log(event.results[0][0].transcript);
+            if (event.results[0][0].transcript === answer) {
+              giggle.thank();
+            } else {
+              giggle.berate();
+            }
+          }
+        };
       }
     });
 })(window.app || (window.app = {}));
