@@ -20,7 +20,12 @@
   ];
 
   var questions = [
-    ['what is the answer to life, the universe, and everything?', '42']
+    ['what is the answer to life, the universe, and everything?', '42'],
+    ['what is 15% of 80', '12'],
+    ['what is 30% of 160', '48'],
+    ['how old is barack obama?', '54'],
+    ['how old is sandra bullock?', '51'],
+    ['what size shoe does Michael Jordan wear', '13']
   ];
 
   function sample(c) { return c[Math.floor(Math.random() * c.length)]; }
