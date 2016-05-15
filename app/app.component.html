@@ -1,2 +1,3 @@
-<oh-prompt></oh-prompt>
-<oh-instructions></oh-instructions>
+<oh-prompt [class.mirror]="isMirrored"></oh-prompt>
+<oh-instructions (onHide)="mirror()"></oh-instructions>
+

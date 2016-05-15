@@ -3,3 +3,10 @@
   max-width: 600px;
   margin: 0 auto;
 }
+
+.mirror {
+  transform: rotateY(180deg);
+	transition: 0.6s .8s;
+	transform-style: preserve-3d;
+	position: relative;
+}

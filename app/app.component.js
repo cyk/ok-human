@@ -8,9 +8,15 @@
       directives: [
         app.InstructionsComponent,
         app.PromptComponent
-      ]
+      ],
     })
     .Class({
-      constructor: function() {}
+      constructor: function() {
+        this.isMirrored = false;
+      },
+      mirror: function() {
+        console.log('mirror', this);
+        this.isMirrored = true;
+      }
     });
 })(window.app || (window.app = {}));
