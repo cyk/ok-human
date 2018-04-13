@@ -1,5 +1,5 @@
 <h1 align="center">
-  <a href="http://ok-human.cyk.im/"><img src="https://cloud.githubusercontent.com/assets/423755/15766173/a8776e70-28f0-11e6-9a0b-c56d9d7b1e7c.png" alt="Ok Human"></a>
+  <a href="http://ok-human.surge.sh/"><img src="https://cloud.githubusercontent.com/assets/423755/15766173/a8776e70-28f0-11e6-9a0b-c56d9d7b1e7c.png" alt="Ok Human"></a>
   <br>
   Ok Human
   <br>
@@ -16,7 +16,7 @@
 
 **Ok Human** is a fun little app to see what it feels like to be on the other side of "Ok Google". Yeah, it's all fun and games until you too are berated when you don't give the correct answer to a question or mishear that your assistance is needed.
 
-You can check out the latest version by visiting [ok-human.cyk.im](http://ok-human.cyk.im) &mdash; it requires microphone access.
+You can check out the latest version by visiting [ok-human.surge.sh](http://ok-human.surge.sh/) &mdash; it requires microphone access.
 
 :warning: This is an [Angular Attack 2016 entry](https://www.angularattack.com/entries/3332-cyk) so the implementation is a bit rushed and needs some work.
 
